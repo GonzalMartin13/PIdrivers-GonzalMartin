@@ -1,0 +1,8 @@
+.cuadroPrincipal{
+    border: 5px double black;
+    border-radius: 20px;
+    padding: 1pc;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
