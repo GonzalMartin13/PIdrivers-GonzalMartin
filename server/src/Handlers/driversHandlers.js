@@ -1,4 +1,5 @@
-const { crearDriverDB, todosLosDrivers, traerDriverPorID, obtenerTeamsDesdeAPI, obtenerTeamsDesdeBD, guardarTeamsEnBD,relacionarEquiposConDriver, traerDriverPorPK } = require("../controllers/postDriverControler")
+const { crearDriverDB, todosLosDrivers, traerDriverPorID, obtenerTeamsDesdeAPI, obtenerTeamsDesdeBD, guardarTeamsEnBD,relacionarEquiposConDriver, traerDriverPorPK } = require("../controllers/postDriverControler");
+const team = require("../models/team");
 const driverLimpio = require("../utils/cleanApi")
 
 const getDriverHandler =  async(req, res) => {
@@ -41,21 +42,31 @@ const getDetailDriverHandler = async (req, res) => {
 
 
 const postCreateDriver =  async(req, res) => {
-    const {name, surname, description, img, nacionalidad, nacimiento,teams} = req.body;
+    const { name, surname, description, img, nacionalidad, nacimiento,teams } = req.body;
+    //console.log(typeof(req.body.teams));
+   // console.log(req.body);
+    //console.log(teams);
+    //console.log("en el handler:" + name, surname, description, img, nacionalidad, nacimiento + " temas:" + req.body.teams);
     try {
-        if (!teams || teams.length === 0) {
-          throw new Error('AGREGA UN EQUIPO CAMPEON');
-        }
-        const piloto = await crearDriverDB(name, surname, description, img,nacionalidad, nacimiento);
-
+        //console.log("teams:" + req.body.teams.length, typeof(req.body.teams));
+        if (!req.body.teams || req.body.teams.length === 0) {
+          throw new Error('AGREGA UN EQUIPO CAMPEÓN dentro del try handler');
+        }else{
+            //console.log("else del if  handler" + teams)
+        const piloto = await crearDriverDB(name, surname, description, img, nacionalidad, nacimiento,);
+      
+        console.log(piloto)
         await relacionarEquiposConDriver(piloto, teams);
-
-        res.status(200).json(piloto);
+        console.log("antes del 200 handler");
+        res.status(200).json({piloto});
+        console.log("después del 200 handler");
+        }
     } catch (error) {
-    res.status(400).json({error : error.message});
+        console.log("catch del handler" + req.body.teams);
+        res.status(400).json({ error: error.message });
+    }
 }
 
-}
 module.exports = {
     getDriverHandler,
     getTeamHandler,

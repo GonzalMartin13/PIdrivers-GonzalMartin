@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import axios from "axios"
 
 function FormCrearDriver() {
   // Estados para almacenar los valores de los campos del formulario
   const [usuario, setUsuario] = useState({
-    nombre: '',
-    apellido: '',
-    imagen: '',
+    name: '',
+    surname: '',
+    description: '',
+    img: '',
     nacionalidad: '',
-    descripcion: '',
-    fechaNacimiento: '',
-    equipo: '',
+    nacimiento: '',
+    teams: "",
   });
 
   // Función para manejar cambios en los campos del formulario
@@ -21,26 +22,52 @@ function FormCrearDriver() {
     });
   };
 
+  const verificaciones = (input) => {
+    if (!/^[a-zA-Z]+$/.test(input.name)) {
+      alert('El nombre solo puede contener letras');
+      return;
+    }
+    
+    if (!/^[a-zA-Z]+$/.test(input.surname)) {
+      alert('El apellido solo puede contener letras');
+      return;
+    }
+
+    if (input.img.trim() === '') {
+      alert('La imagen no puede estar vacía');
+      return;
+    }
+  }
+
+const agregarDriver =  async (usuario) => {
+  
+  try {
+    
+    const response =  await axios.post('http://localhost:3001/drivers/', usuario);
+
+    // Si la solicitud fue exitosa (código de respuesta 200-299)
+    if (response.status === 200 ) {
+      const data = response.data;
+      // Aquí puedes manejar la respuesta del servidor, por ejemplo, actualizar el estado o mostrar un mensaje de éxito.
+      console.log('Conductor agregado:', data);
+    } else {
+      throw new Error('Error al agregar el conductor catch');
+    }
+  } catch (error) {
+ /*  */
+  }
+};
+
+
   // Función para manejar el envío del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Verificaciones
-    if (!/^[a-zA-Z]+$/.test(usuario.nombre)) {
-      alert('El nombre solo puede contener letras');
-      return;
-    }
-    
-    if (!/^[a-zA-Z]+$/.test(usuario.apellido)) {
-      alert('El apellido solo puede contener letras');
-      return;
-    }
+    verificaciones(usuario) 
+    console.log("estoy entre ceirficacuibes y agregar")   
 
-    if (usuario.imagen.trim() === '') {
-      alert('La imagen no puede estar vacía');
-      return;
-    }
-
+    agregarDriver(usuario);
     // Aquí puedes realizar la lógica para agregar el objeto 'usuario' a tu base de datos
     // Por ejemplo, podrías hacer una solicitud a una API o usar una base de datos local.
     // En este ejemplo, simplemente mostraremos los datos en la consola.
@@ -48,94 +75,96 @@ function FormCrearDriver() {
 
     // Limpia el formulario después de enviar
     setUsuario({
-      nombre: '',
-      apellido: '',
-      imagen: '',
+      name: '',
+      surname: '',
+      description: '',
+      img: '',
       nacionalidad: '',
-      descripcion: '',
-      fechaNacimiento: '',
-      equipo: '',
+      nacimiento: '',
+      teams: '',
     });
   };
 
+
+
   return (
     <div>
-      <h2>Formulario de Usuario</h2>
+      <h2>Agregar piloto</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="nombre">Nombre:</label> <br />
+          <label htmlFor="name">Nombre:</label> <br />
           <input
             type="text"
-            id="nombre"
-            name="nombre"
-            value={usuario.nombre}
+            id="name"
+            name="name"
+            value={usuario.name}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="apellido">Apellido:</label> <br></br>
+          <label htmlFor="surname">surname:</label> <br></br>
           <input
             type="text"
-            id="apellido"
-            name="apellido"
-            value={usuario.apellido}
+            id="surname"
+            name="surname"
+            value={usuario.surname}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="imagen">Imagen:</label><br />
+          <label htmlFor="img">Imagen:</label><br />
           <input
             type="text"
-            id="imagen"
-            name="imagen"
-            value={usuario.imagen}
+            id="img"
+            name="img"
+            value={usuario.img}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="nacionalidad">Nacionalidad:</label><br />
+          <label htmlFor="nacionalidad">nacionalidad:</label><br />
           <input
             type="text"
             id="nacionalidad"
             name="nacionalidad"
             value={usuario.nacionalidad}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="descripcion">Descripción:</label><br />
+          <label htmlFor="description">Descripción:</label><br />
           <textarea
-            id="descripcion"
-            name="descripcion"
-            value={usuario.descripcion}
+            id="description"
+            name="description"
+            value={usuario.description}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label><br />
+          <label htmlFor="nacimiento">Fecha de Nacimiento:</label><br />
           <input
             type="date"
-            id="fechaNacimiento"
-            name="fechaNacimiento"
-            value={usuario.fechaNacimiento}
+            id="nacimiento"
+            name="nacimiento"
+            value={usuario.nacimiento}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <div>
-          <label htmlFor="equipo">Equipo:</label><br />
+          <label htmlFor="teams">Escuderia:</label><br />
           <input
             type="text"
-            id="equipo"
-            name="equipo"
-            value={usuario.equipo}
+            id="teams"
+            name="teams"
+            value={usuario.teams}
             onChange={handleInputChange}
-            required
+            // required
           />
         </div>
         <button type="submit">Enviar</button>

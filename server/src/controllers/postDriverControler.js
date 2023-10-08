@@ -3,7 +3,9 @@ const axios = require ("axios");
 const driverLimpio = require("../utils/cleanApi")
 
 const crearDriverDB = async (name, surname, description, img, nacionalidad, nacimiento) => {
+  
     try {
+      
         const nuevoPiloto = await Driver.create({
           name,
           surname,
@@ -12,20 +14,25 @@ const crearDriverDB = async (name, surname, description, img, nacionalidad, naci
           nacionalidad,
           nacimiento,
         });
+        
     
         return nuevoPiloto;
       } catch (error) {
-        throw error;
+
+        throw error ;
       }
 };
 
 
 const relacionarEquiposConDriver = async (driver, teams) => {
+
     try {
-      const equiposPromises = teams.map(async (teamName) => {
+      
+      const equiposPromises = teams.split().map(async (teamName) => {
         const [equipo, created] = await Team.findOrCreate({ where: { name: teamName } });
         // Relaciona el conductor con el equipo
         await driver.addTeam(equipo);
+        
       });
   
       await Promise.all(equiposPromises);
