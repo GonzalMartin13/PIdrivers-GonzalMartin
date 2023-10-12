@@ -1,0 +1,46 @@
+/* Estilos para el contenedor de las tarjetas utilizando CSS Grid */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño en cada fila */
+    gap: 5px; /* Espacio entre las tarjetas */
+  }
+  
+ .pagination{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10%;
+ 
+ }
+ .ordenamiento{
+  display: flex;
+  justify-content: space-around;
+ }
+
+ .botpag{
+  display:flex;
+  justify-content: space-between;
+ }
+.pagination button{
+  width: 30%;
+  border-radius: 0px 50px;
+}
+
+  /* Estilos para que las tarjetas sean responsivas en dispositivos pequeños */
+  @media (max-width: 768px) {
+    .card-container {
+      grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño en cada fila en dispositivos pequeños */
+    }
+  }
+  
+  /* Estilos para que las tarjetas sean responsivas en dispositivos aún más pequeños */
+  @media (max-width: 480px) {
+    .card-container {
+      grid-template-columns: 1fr; /* Una columna en dispositivos muy pequeños */
+    }
+  }
+
+.filter{
+    margin-top: 10%;
+  }
+  

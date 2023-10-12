@@ -23,19 +23,18 @@ const crearDriverDB = async (name, surname, description, img, nacionalidad, naci
       }
 };
 
-
 const relacionarEquiposConDriver = async (driver, teams) => {
 
     try {
-      
-      const equiposPromises = teams.split().map(async (teamName) => {
+      const equipos = typeof teams === 'string' ? teams.split(',') : teams;
+      const equiposPromises = equipos.map(async (teamName) => {
         const [equipo, created] = await Team.findOrCreate({ where: { name: teamName } });
         // Relaciona el conductor con el equipo
-        await driver.addTeam(equipo);
+        driver.addTeam(equipo);
         
       });
-  
-      await Promise.all(equiposPromises);
+      const data = await Promise.all(equiposPromises);
+      return data
     } catch (error) {
       throw error;
     }

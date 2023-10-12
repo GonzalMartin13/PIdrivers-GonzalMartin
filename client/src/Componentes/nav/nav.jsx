@@ -1,12 +1,18 @@
 import Searchbar from "../searchbar/search"
+import { NavLink} from "react-router-dom"
+import "./nav.css"
+import {useSelector} from "react-redux"
 
 function Nav() {
+    const user = useSelector(state => state.usuario)
+    console.log(user)
     return (  
-    <>
-        <h1>   Soy el nav, un componente noble </h1>
-        <h2>dehntro mio va la searchbar, saludito (robar nombre desde el stado que s ellena con el ingreso) boton de dubmitear y eiconitos de rutas</h2>
-        <Searchbar/>
-    </>
+    <nav className="nav">
+        <NavLink to="/drivers"> Todos los pilotos</NavLink>
+        <NavLink to="/create"> Crear nuevo Pioloto</NavLink>
+        <p>  Bienvenido {user.nombre} {user.apellido} </p>
+        <Searchbar className="search"/>
+    </nav>
     );
 }
 

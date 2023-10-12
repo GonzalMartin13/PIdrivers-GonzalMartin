@@ -1,0 +1,44 @@
+
+.card {
+    text-align: center;
+    border: 5px double whitesmoke;
+    width: 250px;
+    background-color: rgb(44, 51, 58); 
+    height: 500px;
+    margin-bottom: 10px;
+  }
+  
+
+  .card img {
+    width: 100%; 
+    max-width: 200px; 
+    height: 300px; 
+  }
+  
+
+  .card h2 {
+    font-size: 1.5rem; 
+    margin: 10px 0; 
+  }
+  
+
+  .card p {
+    font-size: 1rem; 
+    margin: 10px 0; 
+  }
+  
+
+  .card button {
+    padding: 10px 20px; 
+    font-size: 1rem; 
+    background-color: #080b0e; 
+    color: #fff; 
+    border: none; 
+    cursor:pointer ;
+  }
+  
+
+  .card button:hover {
+    background-color: #5c738b; 
+  }
+  

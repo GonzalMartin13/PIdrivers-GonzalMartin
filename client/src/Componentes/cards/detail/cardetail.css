@@ -1,0 +1,38 @@
+/* Estilos para el contenedor principal */
+.detail {
+    display: flex; /* Para que los elementos internos estén en línea */
+    align-items: center; /* Centra verticalmente los elementos */
+    border: 15px double whitesmoke;
+    margin-top: 20%;
+    
+  }
+  
+  /* Estilos para el contenedor de la imagen */
+  .img {
+    flex: 1; /* Toma una parte igual del espacio disponible */
+    text-align: center; /* Alinea el contenido al centro horizontalmente */
+  }
+  
+  /* Estilos para la imagen */
+  .img img {
+    width: 550px; 
+    height: max-content; 
+  }
+  
+  /* Estilos para el contenedor de la descripción */
+  .descripcionDetail {
+    flex: 2; /* Toma dos partes del espacio disponible */
+    padding: 20px; /* Espacio interno para separar el contenido */
+  }
+  
+  /* Estilos para los elementos dentro de .descripcionDetail */
+  .descripcionDetail h2,
+  .descripcionDetail p,
+  .descripcionDetail button {
+    margin: 10px 0; /* Espacio vertical entre los elementos */
+  }
+
+  .descripcionDetail{
+    padding: 10px;
+  }
+  

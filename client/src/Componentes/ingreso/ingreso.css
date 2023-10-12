@@ -4,4 +4,17 @@
     padding: 1pc;
     display: flex;
     flex-direction: column;
+    margin-left: 150px;
+    margin-right: 150px;
+    background-color:rgb(44, 51, 58);
+    padding-right:50px; 
+    padding-left:50px; 
 }
+.cuadroPrincipal input{
+    margin: 10px;
+    text-align: center;
+}
+.cuadroPrincipal button{
+    margin: 10px;
+}
+
